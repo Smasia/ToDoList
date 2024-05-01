@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<h2>Logg Inn</h2>
+<form action="{{ url_for('logg_inn') }}" method="post">
+  <input type="text" placeholder="Navn" name="fornavn" autofocus>
+</form>
 
+{% if feil %}
+<h3>{{feil}}</h3>
+{%endif%}
 
 {% endblock %}
