@@ -5,21 +5,30 @@ app = Flask(__name__)
 
 @app.route('/', methods = ["GET"])
 def index():
-  return render_template('index.html')
+  return redirect('/logg_inn')
 
-@app.route("/logg_inn", methods = ["POST"])
+@app.route("/logg_inn", methods = ["GET","POST"])
 def logg_inn():
-  navn = request.form.get("fornavn")
-  print(navn)
-  content = requests.get('http://127.0.0.1:5020/logg_inn', json={"navn": navn}).json()
-  if content["Status"] == "A user":
-    return redirect(url_for('home_page', bruker_navn=content["bruker_navn"]))
-  return render_template("index.html", feil="Fant ikke bruker i systemet")
+  if request.method == "GET":
+    return render_template("index.html")
+  if request.method == "POST":
+    navn = request.form.get("fornavn")
+    content = requests.get('http://127.0.0.1:5020/logg_inn', json={"navn": navn}).json()
+    if content["Status"] == "A user":
+      return redirect(url_for('home_page', bruker_id=content["bruker_id"]))
+    return render_template("index.html", feil="Fant ikke bruker i systemet")
 
-@app.route("/home_page/<bruker_navn>", methods = ["GET"])
-def home_page(bruker_navn):
-  
-  return render_template("home.html")
+@app.route("/home_page/<bruker_id>", methods = ["GET"])
+def home_page(bruker_id):
+  data = requests.get('http://127.0.0.1:5020/get_todos', json={"bruker_id": bruker_id}).json()
+  print(data)
+  return render_template("home.html", bruker_id=bruker_id, data=data)
+
+@app.route("/todo_post/<bruker_id>", methods = ["POST"])
+def todo_post(bruker_id):
+  task = request.form.get("task")
+  requests.post('http://127.0.0.1:5020/legg_til_todo', json={"bruker_id": bruker_id, "task": task})
+  return redirect(url_for('home_page', bruker_id=bruker_id))
 
 if __name__ == '__main__':
   app.run(debug=True, port=5010)

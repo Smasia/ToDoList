@@ -40,5 +40,25 @@ def logg_inn():
   else:
     return {"Status": "A user", "bruker_id": content[0], "bruker_navn": content[1]}
 
+@app.route('/get_todos', methods = ["GET"])
+def get_todos():
+  bruker_id = request.get_json()["bruker_id"]
+  cur.execute("SELECT todo.id, todo.task FROM brukere INNER JOIN todo ON todo.bruker_id = brukere.id WHERE brukere.id = ?", (bruker_id,))
+
+  data = cur.fetchall()
+  content = []
+  for todo in data:
+    content.append({"id": todo[0], "todo": todo[1]})
+  print(content)
+  return content
+
+@app.route('/legg_til_todo', methods = ["POST"])
+def legg_til_todo():
+  task = request.get_json()["task"]
+  bruker_id = request.get_json()["bruker_id"]
+  cur.execute("INSERT INTO todo(bruker_id, task) VALUES(?,?)", (bruker_id, task))
+  con.commit()
+  return {"Status": "no error"}
+
 if __name__ == "__main__":
   app.run(debug=True, port=5020)

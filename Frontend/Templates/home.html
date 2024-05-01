@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<form action="{{ url_for('todo_post', bruker_id=bruker_id) }}" method="post">
+  <input type="text" placeholder="Legg til oppdrag" name="task" autofocus>
+</form>
 
+<ul>
+  {% for item in data %}
+  <li>
+    {{item.todo}}
+  </li>
+  {% endfor %}
+</ul>
 
 {% endblock %}
