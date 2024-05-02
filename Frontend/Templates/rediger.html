@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="{{ url_for('rediger_todo', bruker_id=bruker_id, todo_id=todo_id) }}" method="post">
+  <input type="text" value="{{todo}}" name="task">
+</form>
+
+{% endblock %}

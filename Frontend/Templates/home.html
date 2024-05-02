@@ -8,7 +8,13 @@
 <ul>
   {% for item in data %}
   <li>
-    {{item.todo}}
+    <p>{{item.todo}}</p>
+    <form action="{{ url_for('slett_todo', bruker_id=bruker_id, todo_id=item.id) }}" method="post">
+      <input type="submit" value="x">
+    </form>
+    <form action="{{ url_for('rediger_todo', bruker_id=bruker_id, todo_id=item.id) }}" method="get">
+      <input type="submit" value="Rediger">
+    </form>
   </li>
   {% endfor %}
 </ul>
