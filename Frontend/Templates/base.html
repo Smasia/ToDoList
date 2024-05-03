@@ -4,18 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo list</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
 </head>
 <body>
     
+  <header>
     <h1>To Do List</h1>
     {% if bruker_id %}
     <form action="{{ url_for('logg_inn') }}">
       <input type="submit" value="Bytt bruker">
     </form>
     {% endif %}
+  </header>
+
+  <article>
 
     {% block content %}
     {% endblock %}
+  </article>
 
 </body>
 </html>

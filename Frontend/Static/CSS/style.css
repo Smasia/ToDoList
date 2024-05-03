@@ -1,4 +1,71 @@
 * {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+}
+
+header {
+  width: 100vw;
+  height:15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+  margin-top: 5vh;
+  font-size: xxx-large;
+}
+
+article {
+  width: 100vw;
+  min-height: 85vh;
+  height: auto;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.artikkel-top {
+  margin-top: 5vh;
+}
+
+article ul {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+article ul li:nth-child(odd) {
+  background-color: #ddd;
+}
+
+article ul li {
+  list-style: circle;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#knapper-på-slutten {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  right: 0;
+}
+
+#knapper-på-slutten input {
+  right: 0;
+}
+
+#rediger-todo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#rediger-todo input {
+  width: fit-content;
 }

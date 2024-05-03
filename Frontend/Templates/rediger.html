@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form action="{{ url_for('rediger_todo', bruker_id=bruker_id, todo_id=todo_id) }}" method="post">
-  <input type="text" value="{{todo}}" name="task">
+<form id="rediger-todo" class="artikkel-top" action="{{ url_for('rediger_todo', bruker_id=bruker_id, todo_id=todo_id) }}" method="post">
+  <input type="text" value="{{todo}}" name="task" autofocus>
+  <input type="submit" value="Lagre endringer">
+</form>
+
+<form action="{{ url_for('home_page', bruker_id=bruker_id) }}">
+  <input type="submit" value="Avbryt">
 </form>
 
 {% endblock %}
