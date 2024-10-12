@@ -3,7 +3,7 @@ import sqlite3
 
 app = Flask(__name__)
 
-con = sqlite3.connect("database.db", check_same_thread=False)
+con = sqlite3.connect("/var/www/flask-application/database.db", check_same_thread=False)
 cur = con.cursor()
 
 cur.execute("""
@@ -83,4 +83,4 @@ def rediger_todo():
     return {"Status": "no error"}
 
 if __name__ == "__main__":
-  app.run(debug=True, port=5020)
+  app.run(debug=True)
